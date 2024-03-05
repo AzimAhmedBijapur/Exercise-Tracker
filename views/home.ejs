@@ -7,13 +7,9 @@
     <title>E-tracker</title>
     <link href="./output.css" rel="stylesheet">
     <link href="./styles.css" rel="stylesheet">
-    <link rel="stylesheet"
+    <!-- <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
+</head> -->
 
 <body class="">
     <div>
@@ -24,35 +20,37 @@
                 </div>
                 <div class="flex gap-6 text-lg sm:mr-4 mr-2">
                     <a href="/logout">Logout</a>
-                    <a href="/add"><span class="material-symbols-outlined hover:scale-110" style="font-size: 2rem;">
-                            Add
-                        </span></a>
+                    <a href="/add"><img class="" src="/icons/add.svg" style="height:2rem">
+                    </a>
                 </div>
             </nav>
         </header>
         <div class="flex justify-center flex-col items-center gap-6 mt-10">
-            <% for(var i=0; i < exercises.length; i++) { %>
+            <%if(exercises.length==0){%>
+                <img class="mt-16" src="/images/empty.svg" alt="No Workouts!" style="height:50vh;">
+                <%}%>
+                    <% for(var i=0; i < exercises.length; i++) { %>
 
-                <div class="flex items-center justify-evenly gap-6 sm:w-1/2 w-3/4 bg-green-200 p-4">
-                    <div class="flex cursor-pointer trigger" onclick="showModal('<%= exercises[i].description %>')">
-                        <div class="flex flex-col gap-2">
-                            <span class="text-xl font-bold">
-                                <%= exercises[i].date %>
-                            </span>
-                            <span class="text-lg">
-                                <%= exercises[i].duration %>&nbsp;mins
-                            </span>
+                        <div class="flex items-center justify-evenly gap-6 sm:w-1/2 w-3/4 bg-green-200 p-4">
+                            <div class="flex cursor-pointer trigger"
+                                onclick="showModal('<%= exercises[i].description %>')">
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-xl font-bold">
+                                        <%= exercises[i].date %>
+                                    </span>
+                                    <span class="text-lg">
+                                        <%= exercises[i].duration %>&nbsp;mins
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="/delete/<%=i%>%>" class="font-medium rounded ">
+                                    <img class="" src="/icons/delete.svg" style="height:2rem">
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <a href="/delete/<%=i%>%>" class="font-medium rounded ">
-                            <span class=" material-symbols-outlined hover:scale-105" style="font-size: 2rem;">
-                                Delete
-                            </span></a>
-                    </div>
-                </div>
 
-                <% } %>
+                        <% } %>
         </div>
         <div class="modal" onclick="hideModal()">
 
