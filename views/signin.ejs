@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-tracker</title>
+    <link href="./output.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="p-3 font-bold">
+        <nav>
+            <h1 class="text-3xl sm:ml-4 ml-2">E-tracker</h1>
+        </nav>
+    </header>
+    <main class="flex justify-center py-16">
+        <form action="" method="post" onsubmit="return validatePassword()"
+            class="flex flex-col items-center justify-center sm:w-1/2 md:w-1/4 w-3/4 ">
+            <div id="error-div" class="text-red-500 text-lg"></div>
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="text" name="fname" id="fname" required
+                placeholder="Enter first name " maxlength="30">
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="text" name="lname" id="lname" required
+                placeholder="Enter last name " maxlength="30">
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="text" name="username" id="username"
+                required placeholder="Enter username">
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="password" name="password1" id="password1"
+                required placeholder="Enter password" minlength="8" maxlength="15"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,15}$"
+                title="Password must be between 8 and 15 characters long, and include at least one lowercase letter, one uppercase letter, and one number.">
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="password" name="password2" id="password2"
+                required placeholder="Re-enter password" minlength="8" maxlength="15">
+            <input class="w-full mt-6 bg-blue-200 font-medium text-lg p-2 rounded " type="submit" value="Sign in">
+        </form>
+    </main>
+
+</body>
+
+<script>
+    function validatePassword() {
+        const password1 = document.getElementById('password1').value;
+        const password2 = document.getElementById('password2').value;
+        const errdiv = document.getElementById('error-div');
+
+        if (password1 !== password2) {
+            errdiv.textContent = 'Passwords do not match';
+            return false;
+        }
+        else
+            return true;
+    }
+</script>
+
+</html>

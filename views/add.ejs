@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-tracker</title>
+    <link href="./output.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="p-3 font-bold">
+        <nav>
+            <h1 class="text-3xl sm:ml-4 ml-2">E-tracker</h1>
+        </nav>
+    </header>
+    <main class="flex justify-center py-16">
+        <form action="/add" method="POST" class="flex flex-col items-center justify-center sm:w-1/2 md:w-1/4 w-3/4 ">
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="date" name="date" id="date" required>
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="number" name="duration" id="duration"
+                required placeholder="Duration in mins" min="1" max="500">
+            <textarea class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " name="description" id="description" required
+                placeholder="Descirbe" maxlength="300"></textarea>
+            <input class="w-full mt-6 bg-green-200 font-medium text-lg p-2 rounded " type="submit" value="Add">
+        </form>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-tracker</title>
+    <link href="./output.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="p-3 font-bold">
+        <nav>
+            <h1 class="text-3xl sm:ml-4 ml-2">E-tracker</h1>
+        </nav>
+    </header>
+    <main class="flex justify-center py-28">
+        <div class="">
+            <%if(locals.message){%>
+                <%= message %>
+                    <%}%>
+        </div>
+        <form action="" method="POST" class="flex flex-col items-center justify-center sm:w-1/2 md:w-1/4 w-3/4 ">
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="text" name="username" id="username"
+                required placeholder="Enter username">
+            <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="password" name="password" id="password"
+                required placeholder="Enter password">
+            <input class="w-full mt-6 bg-blue-200 font-medium text-lg p-2 rounded " type="submit" value="Login">
+            <div class="mt-10 text-lg">
+                Not registered? <a href="/signin" class="text-blue-500">Sign In</a>
+            </div>
+        </form>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-tracker</title>
+    <link href="./output.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body class="">
+    <div>
+        <header class="p-3 ">
+            <nav class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold sm:ml-4 ml-2">E-tracker</h1>
+                </div>
+                <div class="flex gap-6 text-lg sm:mr-4 mr-2">
+                    <a href="/logout">Logout</a>
+                    <a href="/add"><span class="material-symbols-outlined hover:scale-110" style="font-size: 2rem;">
+                            Add
+                        </span></a>
+                </div>
+            </nav>
+        </header>
+        <div class="flex justify-center flex-col items-center gap-6 mt-10">
+            <% for(var i=0; i < exercises.length; i++) { %>
+
+                <div class="flex items-center justify-evenly gap-6 sm:w-1/2 w-3/4 bg-green-200 p-4">
+                    <div class="flex cursor-pointer trigger" onclick="showModal('<%= exercises[i].description %>')">
+                        <div class="flex flex-col gap-2">
+                            <span class="text-xl font-bold">
+                                <%= exercises[i].date %>
+                            </span>
+                            <span class="text-lg">
+                                <%= exercises[i].duration %>&nbsp;mins
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="/delete/<%=i%>%>" class="font-medium rounded ">
+                            <span class=" material-symbols-outlined hover:scale-105" style="font-size: 2rem;">
+                                Delete
+                            </span></a>
+                    </div>
+                </div>
+
+                <% } %>
+        </div>
+        <div class="modal" onclick="hideModal()">
+
+            <div class="modal-content rounded-lg md:w-1/2 w-3/4 overflow-y-scroll">
+                <div class="text-xl text-center font-bold">Description</div>
+                <p class="text-justify mt-4 text-lg">
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="paginate flex justify-center mt-12 gap-6">
+        <%if(page>1){%>
+            <div class="prev"><a href="/?page=<%=page-1%>&limit=<%=limit%>">Previous</a></div>
+            <%}%>
+                <%if(page<totalPages){%>
+                    <div class="next"><a href="/?page=<%=page+1%>&limit=<%=limit%>">Next</a></div>
+                    <%}%>
+    </div>
+</body>
+<script>
+    function showModal(desc) {
+        let modal = document.querySelector('.modal');
+        let modalContent = document.querySelector('.modal-content p');
+        let trigger = document.querySelector('.trigger');
+        modalContent.textContent = desc;
+        modal.style.display = "block";
+    }
+    function hideModal() {
+        let modal = document.querySelector('.modal');
+        modal.style.display = "none";
+    }
+</script>
+
+</html>
