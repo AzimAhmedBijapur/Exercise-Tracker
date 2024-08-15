@@ -10,9 +10,17 @@
 </head>
 
 <body>
-    <header class="p-3 font-bold">
-        <nav>
-            <h1 class="text-3xl sm:ml-4 ml-2">E-tracker</h1>
+    <header class="p-3 ">
+        <nav class="flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-3xl font-bold sm:ml-4 ml-2"><a href="/">E-tracker</a></h1>
+            </div>
+            <div class="flex gap-6 md:text-lg sm:mr-4 mr-2 items-center">
+                <a href="/logout">Logout</a>
+                <a href="/chart">Chart</a>
+                <a href="/add"><img class="" src="/icons/add.svg" style="height:2rem">
+                </a>
+            </div>
         </nav>
     </header>
     <main class="flex justify-center py-16">
@@ -20,11 +28,48 @@
             <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="date" name="date" id="date" required>
             <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="number" name="duration" id="duration"
                 required placeholder="Duration in mins" min="1" max="500">
+            <div class="grid grid-cols-2 gap-2 items-center border-4 border-blue-100 px-4 pb-4 pt-1 mt-4 rounded">
+                <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="name" name="name" id="name"
+                required placeholder="Pushups" min="1" max="50">
+                <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="number" name="reps" id="reps"
+                required placeholder="reps" min="1" max="50">
+                <input class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " type="number" name="dur" id="dur"
+                required placeholder="time in mins" min="1" max="50">
+                <div class="mt-6 flex justify-center">
+                    <button id="addExercise" class="rounded">
+                        <img src="/icons/add.svg" class="bg-green-200 p-2 rounded cursor-pointer" alt="">
+                    </button>
+                </div>
+            </div>
             <textarea class="w-full mt-6 bg-slate-200 text-lg p-2 rounded " name="description" id="description" required
                 placeholder="Descirbe" maxlength="300"></textarea>
             <input class="w-full mt-6 bg-green-200 font-medium text-lg p-2 rounded " type="submit" value="Add">
         </form>
     </main>
+
+    <script>
+        const addExercise = document.getElementById('addExercise');
+        const description = document.getElementById('description');
+        addExercise.addEventListener('click', (e)=>{
+            e.preventDefault();
+            console.log('clicked');
+            const nameofExercise = document.getElementById('name').value;
+            const repsofExercise = document.getElementById('reps').value ;
+            const durofExercise = document.getElementById('dur').value;
+            if(nameofExercise==''){
+                alert('No name specified!');
+                return;
+            }
+            description.value += nameofExercise;
+            if(repsofExercise){
+                description.value += " x" + repsofExercise;
+            }
+            if(durofExercise){
+                description.value += " "+durofExercise +" mins";
+            }
+            description.value += "\n";
+        })
+    </script>
 
 </body>
 

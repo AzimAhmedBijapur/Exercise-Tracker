@@ -106,6 +106,27 @@ router.get('/', authenticateToken, async (req, res) => {
             ...exercise.toObject(),
             date: exercise.date.toDateString()
         }));
+
+        const from = req.query.from ? new Date(req.query.from) : null;
+        const to = req.query.to ? new Date(req.query.to) : null;
+
+        if (from && to) {
+            exercises = exercises.filter(exercise => {
+                const exerciseDate = new Date(exercise.date);
+                return exerciseDate >= from && exerciseDate <= to;
+            });
+        } else if (from) {
+            exercises = exercises.filter(exercise => {
+                const exerciseDate = new Date(exercise.date);
+                return exerciseDate >= from;
+            });
+        } else if (to) {
+            exercises = exercises.filter(exercise => {
+                const exerciseDate = new Date(exercise.date);
+                return exerciseDate <= to;
+            });
+        }
+
         const page = parseInt(req.query.page)||1;
         const limit = parseInt(req.query.limit)||10;
         const totalPages = Math.ceil(exercises.length / limit);
@@ -116,6 +137,54 @@ router.get('/', authenticateToken, async (req, res) => {
         const paginatedExercises = exercises.splice(start,end);
 
         res.render('home',{exercises:paginatedExercises,page:page,totalPages:totalPages,limit:limit});
+    }
+    catch(err){
+        console.log(err);
+        return res.render('login')
+    }
+    
+});
+
+router.get('/chart', authenticateToken, async (req, res) => {
+    var exercises=[]
+    try{
+        const decoded = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
+        const id=decoded.id;
+        const user = await User.findOne({_id:id});
+
+        exercises = user.exercises.map(exercise => ({
+            ...exercise.toObject(),
+            date: exercise.date.toDateString()
+        }));
+
+        const from = req.query.from ? new Date(req.query.from) : null;
+        const to = req.query.to ? new Date(req.query.to) : null;
+
+        if (from && to) {
+            exercises = exercises.filter(exercise => {
+                const exerciseDate = new Date(exercise.date);
+                return exerciseDate >= from && exerciseDate <= to;
+            });
+        } else if (from) {
+            exercises = exercises.filter(exercise => {
+                const exerciseDate = new Date(exercise.date);
+                return exerciseDate >= from;
+            });
+        } else if (to) {
+            exercises = exercises.filter(exercise => {
+                const exerciseDate = new Date(exercise.date);
+                return exerciseDate <= to;
+            });
+        }
+        
+        const durationList = exercises.map(exercise =>{
+            return exercise.duration;
+        })
+        const dateList = exercises.map(exercise =>{
+            return exercise.date;
+        })
+        
+        res.render('showChart',{x:durationList, y:dateList});
     }
     catch(err){
         console.log(err);
