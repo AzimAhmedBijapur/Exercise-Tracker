@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-tracker</title>
+    <link href="./output.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+    <script src="./chart.umd.js"></script>
+<body class="">
+    <div>
+        <header class="p-3 ">
+            <nav class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-xl md:text-3xl font-bold sm:ml-4 ml-2"><a href="/">E-tracker</a></h1>
+                </div>
+                <div class="flex gap-6 md:text-lg sm:mr-4 mr-2 items-center">
+                    <a href="/logout">Logout</a>
+                    <a href="/chart">Chart</a>
+                    <a href="/add"><img class="" src="/icons/add.svg" style="height:2rem">
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <form id="chartFilterForm" action="/chart" method="GET" class="filter-date flex gap-4 items-center justify-center">
+            <div class="flex gap-2 items-center">
+                <label for="from">From:</label>
+                <input class="w-full bg-slate-200 text-lg p-2 rounded" type="date" name="from" id="from">
+            </div>
+            <div class="flex gap-1 items-center">
+                <label for="to">To:</label>
+                <input class="w-full bg-slate-200 text-lg p-2 rounded" type="date" name="to" id="to">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
+        </form>
+        
+
+        <div class="mt-5 flex justify-center items-center">
+            <div class="md:w-2/3">
+                <canvas class="" id="myChart" ></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var durationList = <%- JSON.stringify(x) %>;
+        var dateList = <%- JSON.stringify(y) %>;
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dateList,
+                datasets: [{
+                    label: 'Duration (minutes)',
+                    data: durationList,
+                    backgroundColor: 'rgba(0, 255, 0, 0.2)',
+                    borderColor: 'rgba(0, 255, 0, 1)',
+                    borderWidth: 1,
+                    fill: false,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const chartFilterForm = document.getElementById('chartFilterForm');
+        chartFilterForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+
+                const fromDate = document.getElementById('from').value;
+                const toDate = document.getElementById('to').value;
+
+                const queryParams = new URLSearchParams({
+                    from: fromDate,
+                    to: toDate,
+                }).toString();
+
+                window.location.href = `/chart?${queryParams}`;
+            });
+        });
+
+    </script>
+</body>
+</html>
