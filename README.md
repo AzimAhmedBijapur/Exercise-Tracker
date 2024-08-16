@@ -8,6 +8,8 @@ https://exercise-tracker-37gy.onrender.com/
 - JWT Authentication: Secure authentication system implemented using JSON Web Tokens.
 - CRUD Operations: Full CRUD (Create, Read, Update, Delete) functionality for managing exercises.
 - Pagination: Implemented pagination for better user experience and performance.
+- Filtering: Implemented filtering of workouts based on date.
+- Visualizing workouts duration by date using Chart.js
 - MVC Architecture: Follows the Model-View-Controller architectural pattern for a clean and organized codebase.
 
 ## Technologies Used
@@ -17,3 +19,4 @@ https://exercise-tracker-37gy.onrender.com/
 - Mongoose: ODM (Object Data Modeling) library for MongoDB and Node.js, providing a schema-based solution to model application data.
 - EJS: Embedded JavaScript templates used for rendering dynamic content on the server-side.
 - JWT (JSON Web Tokens): Standard for securely transmitting information between parties as a JSON object.
+- Chart.js: Library for adding html-based charts to web pages.
